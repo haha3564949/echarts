@@ -11,6 +11,17 @@
 	<servlet-mapping>
 		<servlet-name>ApplyServlet</servlet-name>
 		<url-pattern>/ApplyServlet</url-pattern>
+
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ApplyServlet2</servlet-name>
+		<servlet-class>com.fpp.action.ApplyServlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApplyServlet2</servlet-name>
+		<url-pattern>/ApplyServlet2</url-pattern>
+
 	</servlet-mapping>
 
 	<servlet>

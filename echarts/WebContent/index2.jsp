@@ -19,7 +19,7 @@
 <script type="text/javascript">
 
  	$(function(){
- 		var url = '<%=request.getContextPath()%>/ApplyServlet';
+ 		var url = '<%=request.getContextPath()%>/ApplyServlet2';
 		var id = 'main';
 		setChartBar(url);
  	});

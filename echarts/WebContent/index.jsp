@@ -48,20 +48,58 @@
 		       	var option = {
 
 		       		    tooltip: {
-		       		        position: 'top'
+		       		        position: 'top',
+		       		        formatter: function (data) {
+		       		        var res = data[0].name + '<br/>'
+		       		        for (var i = 0, length = data.length; i < length; i++) {
+		       		           res += datas[i] + '：' 
+		       		               + datas[i] + '<br/>'
+		       		         }
+		       		         return res
+		       		       }
+		     
 		       		    },
 		       		    animation: false,
 		       		    grid: {
-		       		        height: '50%',
-		       		        y: '10%'
+		       		     height: '50%',
+		       	        y: '10%'
 		       		    },
 		       		    xAxis: {
+		       		    	axisLabel: {
+		       		            rotate: 90,
+		       		        },
+		       		       position:'top',
+		       		        min:100,
 		       		        type: 'category',
 		       		        data: hours,
 		       		        splitArea: {
 		       		            show: true
 		       		        }
 		       		    },
+		       		 dataZoom: [{
+		                 show:true,
+		                 type: 'inside',
+		                 start: 0,
+		                 end: 50
+		             }, {
+		                 show:true,
+		                 start: 0,
+		                 end: 50,
+		                 top:'1%',
+		          
+		             },
+		             {
+		            	  
+		                     type: 'slider',
+		                     show: true,
+		                     yAxisIndex: [0],
+		                     start:0,
+		                     end:5,
+		                     left: '0%',
+		                  
+		             }
+		             
+		             ],
 		       		    yAxis: {
 		       		        type: 'category',
 		       		        data: days,
@@ -69,6 +107,7 @@
 		       		            show: true
 		       		        }
 		       		    },
+		       		 
 		       		    visualMap: {
 		       		        min: 0,
 		       		        max: 10,
@@ -78,18 +117,21 @@
 		       		        bottom: '15%'
 		       		    },
 		       		    series: [{
-		       		        name: 'Punch Card',
+		       		        name: 'Punch 1Card',
 		       		        type: 'heatmap',
+		       		        width:10,
 		       		        data: data,
 		       		        label: {
 		       		            normal: {
 		       		                show: true
 		       		            }
 		       		        },
+		       		       showAllSymbol:true,	
 		       		        itemStyle: {
 		       		            emphasis: {
 		       		                shadowBlur: 10,
-		       		                shadowColor: 'rgba(0, 0, 0, 0.5)'
+		       		                shadowColor: 'rgba(0, 0, 0, 0.5)',
+		       		             borderWidth:10,
 		       		            }
 		       		        }
 		       		    }]
@@ -106,6 +148,13 @@
 </script>
 </head>
 <body>
-	<div id="main" style="width: 600px; height: 400px;"></div>
+<div id="code">
+<form name="form1"method="POST" action="index2.jsp">   
+  <input type="text" name="code">   
+  <input type="submit" value="提交">   
+  <input type="reset" value="重置">   
+</form>  
+</div>
+<div id="main" style=" overflow:scroll;width: 1200px; height: 1200px;"></div>
 </body>
 </html>
