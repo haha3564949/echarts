@@ -34,7 +34,7 @@ public class ApplyServlet2 extends HttpServlet {
 	    
 //	    String[] hours = {"12a", "1a"};
 //	    String[] days = {"Saturday", "Friday", "Thursday"};
-		
+
 		String code=req.getParameter("code");
 		
 		JSONArray hours=new JSONArray();
@@ -65,6 +65,7 @@ public class ApplyServlet2 extends HttpServlet {
 		
 			
 		mapcode.put(code,0);
+		days.add(code);
 //		ResultSet rstcode=stmt.executeQuery("select  distinct dbms_lob.substr(a.\"stockCode\")  \"stockCode\" from myrzrqye a where dbms_lob.substr(a.\"stockCode\")='"+code+"' order by 1 asc");
 //		int j =0;
 //		while(rstcode.next())
