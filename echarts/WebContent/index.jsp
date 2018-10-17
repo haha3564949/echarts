@@ -149,12 +149,12 @@
 </head>
 <body>
 <div id="code">
-<form name="form1"method="POST" action="index2.jsp">   
+<form name="form1" method="POST" action="index2.jsp">   
   <input type="text" name="code">   
   <input type="submit" value="提交">   
   <input type="reset" value="重置">   
 </form>  
 </div>
-<div id="main" style=" overflow:scroll;width: 1200px; height: 1200px;"></div>
+<div id="main" style=" overflow:scroll;width:1200px;height:800px"></div>
 </body>
 </html>

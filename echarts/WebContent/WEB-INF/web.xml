@@ -24,6 +24,17 @@
 
 	</servlet-mapping>
 
+
+<servlet>
+		<servlet-name>ApplyServlet3</servlet-name>
+		<servlet-class>com.fpp.action.ApplyServlet3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApplyServlet3</servlet-name>
+		<url-pattern>/ApplyServlet3</url-pattern>
+
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>PieServlet</servlet-name>
 		<servlet-class>com.fpp.action.PieServlet</servlet-class>

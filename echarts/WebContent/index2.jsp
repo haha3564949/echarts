@@ -20,12 +20,13 @@
 
  	$(function(){
  		var url = '<%=request.getContextPath()%>/ApplyServlet2';
+ 		var code='<%=request.getParameter("code")%>';
 		var id = 'main';
-		setChartBar(url);
+		setChartBar(url,code);
  	});
 	
 	//设置ajax访问后台填充柱图
-	 function setChartBar(url){
+	 function setChartBar(url,code){
 		
 		 var Chart=echarts.init(document.getElementById("main"));
 		 Chart.showLoading(
@@ -36,38 +37,110 @@
 		 $.ajax({
 	       	url:url,
 	       	dataType:"json",
+	       	data:{"code":code},
 	       	type:'post',
 	       	success:function(json){
 	       	
-	       		categories = json.categories;  
-	            values = json.values; 
-            
-		       	var option = {  
-	       	        tooltip: {  
-	       	            show: true  
-	       	        },  
-	       	        legend: {  
-	       	            data: ['销量']  
-	       	        },  
-	       	        xAxis: [  
-	       	            {  
-	       	                type: 'category',  
-	       	                data: categories  
-	       	            }  
-	       	        ],  
-	       	        yAxis: [  
-	       	            {  
-	       	                type: 'value'  
-	       	            }  
-	       	        ],  
-	       	        series: [  
-	       	            {  
-	       	                'name': '销量',  
-	       	                'type': 'bar',  
-	       	                'data': values  
-	       	            }  
-	       	        ]  
-	       	    };
+	       		hours = json.hours;  
+	            days = json.days; 
+                data =json.data;
+                data = data.map(function (item) {
+                    return [item[1], item[0], item[2] || '-'];
+                });
+		       	var option = {
+
+		       		    tooltip: {
+		       		        position: 'top',
+		       		        formatter: function (data) {
+		       		        var res = data[0].name + '<br/>'
+		       		        for (var i = 0, length = data.length; i < length; i++) {
+		       		           res += datas[i] + '：' 
+		       		               + datas[i] + '<br/>'
+		       		         }
+		       		         return res
+		       		       }
+		     
+		       		    },
+		       		    animation: false,
+		       		    grid: {
+		       		     height: '30%',
+		       	        y: '40%'
+		       		    },
+		       		    xAxis: {
+		       		    	axisLabel: {
+		       		            rotate: 90,
+		       		        },
+		       		       position:'top',
+		       		        min:100,
+		       		        type: 'category',
+		       		        data: hours,
+		       		        splitArea: {
+		       		            show: true
+		       		        }
+		       		    },
+		       		 dataZoom: [{
+		                 show:true,
+		                 type: 'inside',
+		                 start: 0,
+		                 end: 50
+		             }, {
+		                 show:true,
+		                 start: 0,
+		                 end: 50,
+		                 top:'1%',
+		          
+		             },
+		             {
+		            	  
+		                     type: 'slider',
+		                     show: true,
+		                     yAxisIndex: [0],
+		                     start:0,
+		                     end:5,
+		                     left: '0%',
+		                  
+		             }
+		             
+		             ],
+		       		    yAxis: {
+		       		        type: 'category',
+		       		        data: days,
+		       		        splitArea: {
+		       		            show: true
+		       		        }
+		       		    },
+		       		 
+		       		    visualMap: {
+		       		        min: 0,
+		       		        max: 10,
+		       		        calculable: true,
+		       		        orient: 'horizontal',
+		       		        left: 'center',
+		       		        bottom: '10%'
+		       		    },
+		       		    series: [{
+		       		        name: 'Punch 1Card',
+		       		        type: 'heatmap',
+		       		        width:10,
+		       		        data: data,
+		       		        label: {
+		       		            normal: {
+		       		                show: true
+		       		            }
+		       		        },
+		       		       showAllSymbol:true,	
+		       		        itemStyle: {
+		       		            emphasis: {
+		       		                shadowBlur: 10,
+		       		                shadowColor: 'rgba(0, 0, 0, 0.5)',
+		       		             borderWidth:10,
+		       		            }
+		       		        }
+		       		    }]
+
+		       			
+		       			
+		       	};
 		        Chart.hideLoading();
 		       	Chart.setOption(option);  
 		       	}
@@ -77,6 +150,13 @@
 </script>
 </head>
 <body>
-	<div id="main" style="width: 600px; height: 400px;"></div>
+<div id="code">
+<form name="form1" method="POST" action="index2.jsp">   
+  <input type="text" name="code">   
+  <input type="submit" value="提交">   
+  <input type="reset" value="重置">   
+</form>  
+</div>
+<div id="main" style="	width:1200px;height:200px"></div>
 </body>
 </html>

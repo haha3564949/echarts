@@ -10,6 +10,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Program Files (x86)/tomcat7.0/tomcat7.0/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/my/software/apache-tomcat-7.0.91/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
