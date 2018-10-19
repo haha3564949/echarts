@@ -52,43 +52,45 @@ public class ApplyServlet3 extends HttpServlet {
 		try {
 		Connection conn=md.getConnection();
 		Statement stmt=conn.createStatement();		
-		ResultSet rst=stmt.executeQuery("select dbms_lob.substr(a.\"date\") \"date\",a.open,a.high,a.close,a.low,a.volume from  testdata a order by 1 asc");
+		ResultSet rst=stmt.executeQuery("select dbms_lob.substr(a.\"date\") \"date\",a.open,a.high,a.close,a.low,a.volume from  mytest a order by 1 asc");
 		int i=0;
 		while(rst.next())
 		{
 		 String date=rst.getString("date");
-		 String open=rst.getString("open");
-		 String high=rst.getString("high");		 
-		 String close=rst.getString("close");
-		 String low=rst.getString("low");
-		 String volume=rst.getString("volume");
+		 Float open=rst.getFloat("open");
+		 Float high=rst.getFloat("high");		 
+		 Float close=rst.getFloat("close");
+		 Float low=rst.getFloat("low");
+		 Float volume=rst.getFloat("volume");
 		 
 		 categoryData.add(date); 
 		 
 		 JSONArray item=new JSONArray(); 
+		 item.add(date);
          item.add(open);
          item.add(high);
          item.add(close);
          item.add(low);
          item.add(volume);   	 
+		
+		 
+		 
+//		 item=new JSONArray(); 
+//		 
+//		 item.add(i);
+	
 		 values.add(item);
 		 
-		 
-		 item=new JSONArray(); 
-		 
-		 item.add(i);
-		 item.add(volume);
-		
-		 if (Float.parseFloat(open)>Float.parseFloat(high))
-		 {
-		     item.add(1);
-		 }
-		 else
-		 {
-			 item.add(-1);
-		 volumes.add(item); 	 
-		 }
-		 i++;
+//		 if (Float.parseFloat(open)>Float.parseFloat(high))
+//		 {
+//		     item.add(1);
+//		 }
+//		 else
+//		 {
+//			 item.add(-1);
+//		 volumes.add(item); 	 
+//		 }
+//		 i++;
 		}
 		 } catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -99,10 +101,10 @@ public class ApplyServlet3 extends HttpServlet {
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%---done---%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 	    		
 	    Map<String, Object> json = new HashMap<String, Object>();  
-	    json.put("categoryData", categoryData);  
-	    json.put("values", values);  
-	    json.put("volumes", volumes);
-	    JsonUtils.writeJson(json, req, resp);  
+//	    json.put("categoryData", categoryData);  
+//	    json.put("values", values);  
+//	    json.put("volumes", volumes);
+	    JsonUtils.writeJson(values, req, resp);  
 	}
 
 }
